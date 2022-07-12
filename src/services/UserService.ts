@@ -4,6 +4,6 @@ import { User } from '../models/User';
 
 export default class UserService {
   static fetchUsers(): Promise<AxiosResponse<User[]>> {
-    return $api.get<User[]>('/users');
+    return $api.get<User[]>('/api/users');
   }
 }

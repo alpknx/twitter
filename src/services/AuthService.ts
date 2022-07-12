@@ -7,10 +7,10 @@ export default class AuthServiece {
   static async login(
     payload: LoginRequest
   ): Promise<AxiosResponse<LoginResponse>> {
-    return $api.post('auth/local', payload);
+    return $api.post('/api/auth/local', payload);
   }
 
   static async logout(): Promise<void> {
-    return $api.post('auth/local');
+    return $api.post('/api/auth/local');
   }
 }

@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { call, cancel, fork, put, take } from 'redux-saga/effects';
+import { call, fork, put, take, takeEvery } from 'redux-saga/effects';
 import { LoginRequest } from '../../models/login/LoginRequest';
 import { LoginResponse } from '../../models/login/LoginResponse';
 import AuthServiece from '../../services/AuthService';
@@ -23,20 +23,18 @@ function* handleLogout() {
   localStorage.removeItem('jwt');
 }
 
-function* loginFlow() {
-  while (true) {
+function* loginWatcher() {
+  try {
     const action: PayloadAction<LoginRequest> = yield take(
       authActions.login.type
     );
-    yield fork(handleLogin, action.payload);
+    yield call(handleLogin, action.payload);
+  } catch (error: any) {
     yield take(authActions.loginFailed.type);
-    if (action.type === authActions.loginFailed.type) {
-      yield cancel(yield fork(handleLogin, action.payload));
-    }
     yield call(handleLogout);
   }
 }
 
 export default function* authSaga() {
-  yield fork(loginFlow);
+  yield takeEvery(authActions.login.type, loginWatcher);
 }
