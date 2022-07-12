@@ -3,7 +3,7 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 import { privateRoutes, publicRoutes } from '../router/routing';
 
 const AppRouter = () => {
-  const isAuth = useTypedSelector((state) => state.auth.isAuth);
+  const { isAuth } = useTypedSelector((state) => state.auth);
   return isAuth ? (
     <Routes>
       {privateRoutes.map((route) => {

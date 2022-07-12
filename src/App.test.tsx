@@ -1,9 +1,18 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 import App from './App';
+import ReactDOM from 'react-dom';
+import { store } from './redux/store';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>,
+    div
+  );
 });
