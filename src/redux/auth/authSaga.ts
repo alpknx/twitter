@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { call, fork, put, take, takeEvery } from 'redux-saga/effects';
+import { call, put, take, takeEvery } from 'redux-saga/effects';
 import { LoginRequest } from '../../models/login/LoginRequest';
 import { LoginResponse } from '../../models/login/LoginResponse';
 import AuthServiece from '../../services/AuthService';
@@ -31,7 +31,6 @@ function* loginWatcher() {
     yield call(handleLogin, action.payload);
   } catch (error: any) {
     yield take(authActions.loginFailed.type);
-    yield call(handleLogout);
   }
 }
 
