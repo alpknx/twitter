@@ -9,7 +9,7 @@ export interface AuthError {
 
 export interface AuthState {
   isAuth: boolean;
-  currentUser?: User;
+  currentUser?: User | null;
   isLoading: boolean;
   error: AuthError;
 }

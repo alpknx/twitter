@@ -9,8 +9,4 @@ export default class AuthServiece {
   ): Promise<AxiosResponse<LoginResponse>> {
     return $api.post('/api/auth/local', payload);
   }
-
-  static async logout(): Promise<void> {
-    return $api.post('/api/auth/local');
-  }
 }
