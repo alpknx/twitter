@@ -1,17 +1,24 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import { Avatar, Card, CardHeader } from '@mui/material';
+import { red } from '@mui/material/colors';
+import Header from '../Header/Header';
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import { authActions } from '../redux/auth/authSlice';
 
 const Home = () => {
   const user = useTypedSelector((state) => state.auth.currentUser);
-  const dispatch = useDispatch();
-
   return (
-    <div>
-      <div>{user?.username}</div>
-      <button onClick={() => dispatch(authActions.logout())}>Logout</button>
-    </div>
+    <>
+      <Header />
+      <Card sx={{ maxWidth: 345 }}>
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
+              R
+            </Avatar>
+          }
+          title={`${user?.username}`}
+        />
+      </Card>
+    </>
   );
 };
 
